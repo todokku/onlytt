@@ -87,5 +87,43 @@ async def rps(ctx, arg=None):
         await ctx.send(random.choice(['Rock, I won',
                                           ':newspaper: , You won',
                                           ':scissors: , Its a tie']))
+@bot.command(name='8ball')
+async def _8ball(ctx, arg=None):
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    channel = bot.get_channel(559253532759425044)
+    if ctx.channel.id != x:
+        abc = await ctx.send('Please write this command in {}'.format(y.mention))
+        await asyncio.sleep(3)
+        await abc.delete()
+        await ctx.message.delete()
+    elif arg is None:
+        f = await ctx.send('Please ask a question also')
+        await asyncio.sleep(3)
+        await f.delete()
+        await ctx.message.delete()
+    else:
+        await ctx.send(random.choice(['```Maybe```',
+                                      '```Yes```',
+                                      '```No```',
+                                      '```100%```',
+                                      '```Scince says **Yes** ```',
+                                      '```Scince says **No**```',
+                                      '```Can\'t say```']))
+
+
+
+@bot.group(name='help')
+async def help(ctx):
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    if ctx.channel.id != x:
+        abc = await ctx.send('Please write this command in {}'.format(y.mention))
+        await asyncio.sleep(3)
+        await abc.delete()
+        await ctx.message.delete()
+    else:
+        if ctx.invoked_subcommand is None:
+            await ctx.send(embed = discord.Embed(title='Help Command', colour=discord.Colour(0x7ed321), description=' Categories  \n `Other` - Commands for soem extra stuff (included some important stuff) \n  `Fun -` Game commands for Everyone \n'))
         
 bot.run(os.getenv('TOKEN'))
