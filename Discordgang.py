@@ -1,20 +1,12 @@
 import discord
 from discord.ext.commands import CommandNotFound
-import os
-import aiohttp
-from io import BytesIO
 from discord import Game
 from discord.ext import commands
 from discord import Member
 from discord import emoji
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
 import random
 import asyncio
 
-TOKEN = 'NTU2NjkyMzU4NjE2MzE3OTUz.D29btA.Mlos2dUhKC1LH1ZQzscBkLXVPt0'
-os.chdir(r'C:\Users\BKhushi\Desktop\gg')
 bot = commands.Bot(command_prefix='p/')
 
 bot.remove_command('help')
@@ -173,9 +165,6 @@ async def info(ctx):
         await ctx.message.delete()
     else:
         await ctx.send(embed = discord.Embed(title='roles Info', colour=discord.Colour(0x7ed321), description='**Roles** \n `Notify` - If this is enabled you get Notified/Pinged if there is any announcments/new staff member \n `More Comming Soon...`'))
-
-
-
 
 @enable.command(pass_context=True)
 async def notify(ctx):
