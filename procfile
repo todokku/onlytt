@@ -1,1 +1,1 @@
-worker: python Discordgang.py
+worker: python discordgang.py
