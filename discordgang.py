@@ -47,7 +47,7 @@ async def on_member_remove(member):
                                       '**{}#{}** Has left our server. What a loser'.format(member.name, member.discriminator)]))
 
 @bot.command(name='clear')
-@commands.has_permissions(manage_messages=True)
+@commands.has_permissions(ban_members=True)
 async def clear(ctx, amount: int):
     await ctx.channel.purge(limit=amount)
     mg = await ctx.send('```Deleted {} Messages```'.format(amount))
@@ -63,5 +63,29 @@ async def clear_error(ctx, error):
         mag = await ctx.send('```p/clear [amount]```')
         await asyncio.sleep(2)
         await mag.delete()
-
+@bot.command()
+async def rps(ctx, arg=None):
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    channel = bot.get_channel(559253532759425044)
+    if ctx.channel.id != x:
+        abc = await ctx.send('Please write this command in {}'.format(y.mention))
+        await asyncio.sleep(3)
+        await abc.delete()
+        await ctx.message.delete()
+    elif arg is None:
+        ctx.send('```p/rps [r or p or s], r for rock, p for paper, s for scissors```')
+    elif 'p' in arg:
+        await ctx.send(random.choice(['Rock, You won',
+                                      ':newspaper: , Its a tie',
+                                      ':scissors: , I won']))
+    elif 'r' in arg:
+        await ctx.send(random.choice(['Rock, Its a tie',
+                                      ':newspaper: , I won',
+                                      ':scissors: , You won']))
+    elif 's' in arg:
+        await ctx.send(random.choice(['Rock, I won',
+                                          ':newspaper: , You won',
+                                          ':scissors: , Its a tie']))
+        
 bot.run(os.getenv('TOKEN'))
