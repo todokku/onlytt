@@ -42,17 +42,6 @@ async def on_member_remove(member):
                                       '**{}#{}** Has left our server. What a loser'.format(member.name, member.discriminator)]))
 
 
-
-
-
-
-
-
-
-
-
-
-
 @bot.command(name='clear')
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount: int):
@@ -160,9 +149,6 @@ async def info(ctx):
         await ctx.message.delete()
     else:
         await ctx.send(embed = discord.Embed(title='roles Info', colour=discord.Colour(0x7ed321), description='**Roles** \n `Notify` - If this is enabled you get Notified/Pinged if there is any announcments/new staff member \n `More Comming Soon...`'))
-
-
-
 
 @enable.command(pass_context=True)
 async def notify(ctx):
