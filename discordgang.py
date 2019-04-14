@@ -66,9 +66,9 @@ async def clear_error(ctx, error):
         await mag.delete()
 @bot.command()
 async def rps(ctx, arg=None):
-    y = bot.get_channel(566910115282681857)
-    x = (566910115282681857)
-    channel = bot.get_channel(566910115282681857)
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    channel = bot.get_channel(559253532759425044)
     if ctx.channel.id != x:
         abc = await ctx.send('Please write this command in {}'.format(y.mention))
         await asyncio.sleep(3)
@@ -90,9 +90,9 @@ async def rps(ctx, arg=None):
                                           ':scissors: , Its a tie']))
 @bot.command(name='8ball')
 async def _8ball(ctx, arg=None):
-    y = bot.get_channel(566910115282681857)
-    x = (566910115282681857)
-    channel = bot.get_channel(566910115282681857)
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    channel = bot.get_channel(559253532759425044)
     if ctx.channel.id != x:
         abc = await ctx.send('Please write this command in {}'.format(y.mention))
         await asyncio.sleep(3)
@@ -116,8 +116,8 @@ async def _8ball(ctx, arg=None):
 
 @bot.group(name='help')
 async def help(ctx):
-    y = bot.get_channel(566910115282681857)
-    x = (566910115282681857)
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
     if ctx.channel.id != x:
         abc = await ctx.send('Please write this command in {}'.format(y.mention))
         await asyncio.sleep(3)
@@ -126,5 +126,67 @@ async def help(ctx):
     else:
         if ctx.invoked_subcommand is None:
             await ctx.send(embed = discord.Embed(title='Help Command', colour=discord.Colour(0x7ed321), description=' Categories  \n `Other` - Commands for soem extra stuff (included some important stuff) \n  `Fun -` Game commands for Everyone \n'))
-        
+
+@bot.group(name='enable')
+async def enable(ctx):
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    channel = bot.get_channel(559253532759425044)
+    if ctx.channel.id != x:
+        abc = await ctx.send('Please write this command in {}'.format(y.mention))
+        await asyncio.sleep(3)
+        await abc.delete()
+        await ctx.message.delete()
+    else:
+        if ctx.invoked_subcommand is None:
+            await ctx.send('```p/enable (role) and do p/enable info for info of the available roles```')
+
+@enable.command(pass_context=True)
+async def info(ctx):
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    if ctx.channel.id != x:
+        abc = await ctx.send('Please write this command in {}'.format(y.mention))
+        await asyncio.sleep(3)
+        await abc.delete()
+        await ctx.message.delete()
+    else:
+        await ctx.send(embed = discord.Embed(title='roles Info', colour=discord.Colour(0x7ed321), description='**Roles** \n `Notify` - If this is enabled you get Notified/Pinged if there is any announcments/new staff member \n `More Comming Soon...`'))
+
+
+
+
+@enable.command(pass_context=True)
+async def notify(ctx):
+    role = discord.utils.get(ctx.guild.roles, name="Notification")
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    if ctx.channel.id != x:
+        abc = await ctx.send('Please write this command in {}'.format(y.mention))
+        await asyncio.sleep(3)
+        await abc.delete()
+        await ctx.message.delete()                                   
+    elif role in ctx.author.roles:
+        await ctx.author.remove_roles(role)
+        await  ctx.send('```Removed notification role```')
+    else:
+        await ctx.author.add_roles(role)
+        await ctx.send('```Added notification role```')
+
+@help.command(pass_context=True)
+async def moderation(ctx):
+    await ctx.send('The command is not added yet')
+
+@help.command(pass_context=True)
+async def other(ctx):
+    y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    if ctx.channel.id != x:
+        abc = await ctx.send('Please write this command in {}'.format(y.mention))
+        await asyncio.sleep(3)
+        await abc.delete()
+        await ctx.message.delete()
+    else:
+        await ctx.send(embed = discord.Embed(title='Other Stuffs', colour=discord.Colour(0x7ed321), description='`p/enable` - adds some special roles do p/enable info for more information \n `More Comming Soon...`'))
+
 bot.run(os.getenv('TOKEN'))
