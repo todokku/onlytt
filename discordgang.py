@@ -46,4 +46,12 @@ async def on_member_remove(member):
                                       '**{}#{}** Has left our server. L'.format(member.name, member.discriminator),
                                       '**{}#{}** Has left our server. What a loser'.format(member.name, member.discriminator)]))
 
+@bot.command(name='clear')
+@commands.has_permissions(manage_messages=True)
+async def clear(ctx, amount: int):
+    await ctx.channel.purge(limit=amount)
+    mg = await ctx.send('```Deleted {} Messages```'.format(amount))
+    await asyncio.sleep(3)
+    await mg.delete()
+
 bot.run(os.getenv('TOKEN'))
