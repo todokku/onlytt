@@ -16,7 +16,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     game = discord.Activity(name="GodsDevil Network", type=discord.ActivityType.listening)
-    await bot.change_presence(status=discord.Status.dnd, activity=game)
+    await bot.change_presence(status=discord.Status.idle, activity=game)
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -66,9 +66,9 @@ async def clear_error(ctx, error):
         await mag.delete()
 @bot.command()
 async def rps(ctx, arg=None):
-    y = bot.get_channel(559253532759425044)
-    x = (559253532759425044)
-    channel = bot.get_channel(559253532759425044)
+    y = bot.get_channel(566910115282681857)
+    x = (566910115282681857)
+    channel = bot.get_channel(566910115282681857)
     if ctx.channel.id != x:
         abc = await ctx.send('Please write this command in {}'.format(y.mention))
         await asyncio.sleep(3)
@@ -90,9 +90,9 @@ async def rps(ctx, arg=None):
                                           ':scissors: , Its a tie']))
 @bot.command(name='8ball')
 async def _8ball(ctx, arg=None):
-    y = bot.get_channel(559253532759425044)
-    x = (559253532759425044)
-    channel = bot.get_channel(559253532759425044)
+    y = bot.get_channel(566910115282681857)
+    x = (566910115282681857)
+    channel = bot.get_channel(566910115282681857)
     if ctx.channel.id != x:
         abc = await ctx.send('Please write this command in {}'.format(y.mention))
         await asyncio.sleep(3)
@@ -116,8 +116,8 @@ async def _8ball(ctx, arg=None):
 
 @bot.group(name='help')
 async def help(ctx):
-    y = bot.get_channel(559253532759425044)
-    x = (559253532759425044)
+    y = bot.get_channel(566910115282681857)
+    x = (566910115282681857)
     if ctx.channel.id != x:
         abc = await ctx.send('Please write this command in {}'.format(y.mention))
         await asyncio.sleep(3)
