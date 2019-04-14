@@ -53,5 +53,15 @@ async def clear(ctx, amount: int):
     mg = await ctx.send('```Deleted {} Messages```'.format(amount))
     await asyncio.sleep(3)
     await mg.delete()
+@clear.error
+async def clear_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        a = await ctx.send('```U don\'t have the permissions to use clear command```')
+        await asyncio.sleep(3)
+        await a.delete()
+    else:
+        mag = await ctx.send('```p/clear [amount]```')
+        await asyncio.sleep(2)
+        await mag.delete()
 
 bot.run(os.getenv('TOKEN'))
