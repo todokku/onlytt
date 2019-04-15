@@ -198,7 +198,7 @@ async def fun(ctx):
     else:
         await ctx.send(embed = discord.Embed(title='Fun Commands', colour=discord.Colour(0x7ed321), description='`p/8ball`- Ask a question the 8ball will answer it with yes or no \n `p/rps`- Rock paper scissors game p/rps (r/p/s)'))
 
-@bot.command(name='announce'
+@bot.command(name='announce')
 async def announce(ctx, *,arg2):
     role = discord.utils.get(ctx.guild.roles, name="Notification")
     if ctx
