@@ -16,7 +16,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     game = discord.Activity(name="GodsDevil Network", type=discord.ActivityType.listening)
-    await bot.change_presence(status=discord.Status.dnd, activity=game)
+    await bot.change_presence(status=discord.Status.idle, activity=game)
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -31,10 +31,10 @@ async def on_command_error(ctx, error):
 async def on_member_join(member):
     role = discord.utils.get(ctx.guild.roles, name="Applyes")
     role1 = discord.utils.get(ctx.guild.roles, name="Member")
-    channel = bot.get_channel(559254248550957057) 
+    channel = bot.get_channel(559254248550957057)
+    await member.send('Hello {} Welcome to GodsDevil Network,**Please Read Our Rules**')
     guild = member.guild
-    message ='hello{} welcome to our {} server. Please read the rules so u don\'t get in trouble'.format(member.mention, guild.name)
-    await channel.send(message)
+    await channel.send(embed=discord.Embed(title='New Member Joined', colour=discord.Colour(0x7ed321), description='{} {} Welcome \n Please read the rules'.format(memeber.avatar_url, member.mention)))
     await member.add_roles(role1)
     await member.add_roles(role)
 @bot.event
