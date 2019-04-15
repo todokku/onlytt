@@ -29,10 +29,12 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_member_join(member):
+    role = discord.utils.get(ctx.guild.roles, name="Notification")
     channel = bot.get_channel(559254248550957057) 
     guild = member.guild
     message ='hello{} welcome to our {} server. Please read the rules so u don\'t get in trouble'.format(member.mention, guild.name)
     await channel.send(message)
+    await member.add_roles(role)
 @bot.event
 async def on_member_remove(member):
     channel = bot.get_channel(559254248550957057)
