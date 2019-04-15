@@ -185,4 +185,15 @@ async def other(ctx):
     else:
         await ctx.send(embed = discord.Embed(title='Other Stuffs', colour=discord.Colour(0x7ed321), description='`p/enable` - adds some special roles do p/enable info for more information \n `More Comming Soon...`'))
 
+@help.command(pass_context=True)
+async def fun(ctx):
+        y = bot.get_channel(559253532759425044)
+    x = (559253532759425044)
+    if ctx.channel.id != x:
+        abc = await ctx.send('Please write this command in {}'.format(y.mention))
+        await asyncio.sleep(3)
+        await abc.delete()
+        await ctx.message.delete()
+    else:
+        await ctx.send(embed = discord.Embed(title='Fun Commands', colour=discord.Colour(0x7ed321), description='`p/8ball`- Ask a question the 8ball will answer it with yes or no \n `p/rps`- Rock paper scissors game p/rps (r/p/s)'))
 bot.run(os.getenv('TOKEN'))
