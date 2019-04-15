@@ -201,7 +201,6 @@ async def fun(ctx):
 @bot.command(name='announce')
 async def announce(ctx, *,arg2):
     role = discord.utils.get(ctx.guild.roles, name="Notification")
-    if ctx
     await ctx.message.delete()
     await ctx.send(embed = discord.Embed(title="Announcement", colour=discord.Colour(0x7ed321), description="{} \n {}".format(role.mention, arg2)))
        
