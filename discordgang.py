@@ -47,6 +47,7 @@ async def on_member_remove(member):
 @commands.has_permissions(ban_members=True)
 async def clear(ctx, amount: int):
     await ctx.channel.purge(limit=amount)
+    await asyncio.sleep(1)
     mg = await ctx.send('```Deleted {} Messages```'.format(amount))
     await asyncio.sleep(3)
     await mg.delete()
@@ -187,7 +188,7 @@ async def other(ctx):
 
 @help.command(pass_context=True)
 async def fun(ctx):
-        y = bot.get_channel(559253532759425044)
+    y = bot.get_channel(559253532759425044)
     x = (559253532759425044)
     if ctx.channel.id != x:
         abc = await ctx.send('Please write this command in {}'.format(y.mention))
@@ -196,4 +197,5 @@ async def fun(ctx):
         await ctx.message.delete()
     else:
         await ctx.send(embed = discord.Embed(title='Fun Commands', colour=discord.Colour(0x7ed321), description='`p/8ball`- Ask a question the 8ball will answer it with yes or no \n `p/rps`- Rock paper scissors game p/rps (r/p/s)'))
+
 bot.run(os.getenv('TOKEN'))
