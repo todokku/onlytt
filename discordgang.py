@@ -18,31 +18,6 @@ bot.remove_command('help')
 async def on_ready():
     game = discord.Activity(name="GodsDevil Network", type=discord.ActivityType.listening)
     await bot.change_presence(status=discord.Status.dnd, activity=game)
-@bot.event
-async def on_message(message):
-    cha = bot.get_channel(553090886683197451)
-    with open('users.json','r') as f:
-        users = json.load(f)
- 
-    await update_data(users, message.author)
-        
-    with open('users.json','w') as f:
-        json.dump(users, f)
-        
-async def update_data(users, user):
-    if not user.id in users:
-        users[user.id] ={}
-        users[user.id]['experience'] = 0
-        users[user.id]['level'] = 1
-async def add_experience(users, user, exp):
-    users[user.id]['experience'] += exp
-async def level_up(users, user, channel):
-    experince = users[user.id]['experience']
-    lvl_start = user[user.id]['level']
-    lvl_end = int(experience ** (1/4))
-    if lvl_start < lvl_end:
-        await cha.send('{} has lecveled up to {}'.format(member.mention, lvl_end))
-        users[user.id]['level'] = lvl_end
     
 @bot.event
 async def on_command_error(ctx, error):
