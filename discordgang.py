@@ -30,13 +30,15 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_member_join(member):
     guild = member.guild
-    role = discord.utils.get(ctx.guild.roles, name="Applyes")
-    role1 = discord.utils.get(ctx.guild.roles, name="Member")
+    role = discord.utils.get(member.guild.roles, name='Member')
+    role1 = discord.utils.get(member.guild.roles, name='Applyes')
+    a = bot.get_channel(565632081569382415)
     channel = bot.get_channel(559254248550957057)
-    await member.send('Hello {} Welcome to GodsDevil Network,**Please Read Our Rules**'.format(member.mention))
-    await channel.send(embed=discord.Embed(title='New Member Joined', colour=discord.Colour(0x7ed321), description='{} Welcome \n Please read the rules'.format(member.mention)))
     await member.add_roles(role1)
-    await member.add_roles(role)
+    await member.add_roles(role)    
+    await member.send('Hello {} Welcome to GodsDevil Network,**Please Read Our Rules**'.format(member.mention))
+    await channel.send('Hello {} \n Welcome to GodsDevil Network \n please read our rules in {}'.format(member.mention, a.mention))
+
 @bot.event
 async def on_member_remove(member):
     channel = bot.get_channel(559254248550957057)
