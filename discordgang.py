@@ -1,5 +1,6 @@
 import discord
 from discord.ext.commands import CommandNotFound
+from discord.utils import get
 from discord.ext.commands import Bot
 from discord.ext import commands
 from discord import Game
@@ -51,19 +52,16 @@ async def on_member_remove(member):
                                       '**{}#{}** Has left our server. What a loser'.format(member.name, member.discriminator)]))
 
 @bot.command(name='clear')
-@commands.has_permissions(ban_members=True)
 async def clear(ctx, amount: int):
-    await ctx.channel.purge(limit=amount)
-    await asyncio.sleep(1)
-    mg = await ctx.send('```Deleted {} Messages```'.format(amount))
-    await asyncio.sleep(3)
-    await mg.delete()
-@clear.error
-async def clear_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        a = await ctx.send('```U don\'t have the permissions to use clear command```')
+    if get(ctx.message.author.role, name="Co-Owner"):
+        await ctx.channel.purge(limit=amount)
+        await asyncio.sleep(1)
+        mg = await ctx.send('```Deleted {} Messages```'.format(amount))
         await asyncio.sleep(3)
-        await a.delete()
+        await mg.delete()
+    else:
+        if not get(ctx.message.author.role, name="Co-Owner"):
+            await ctx.send('```You don\'t have perms to use this command```')
     else:
         mag = await ctx.send('```p/clear [amount]```')
         await asyncio.sleep(2)
@@ -208,8 +206,10 @@ async def fun(ctx):
 @bot.command(name='announce')
 async def announce(ctx, *,arg2):
     role = discord.utils.get(ctx.guild.roles, name="Notification")
-    await ctx.message.delete()
-    await ctx.send(embed = discord.Embed(title="Announcement", colour=discord.Colour(0x7ed321), description="{} \n {}".format(role.mention, arg2)))
-       
+    if get(ctx.message.author.role, name="Co-Owner"):
+        await ctx.message.delete()
+        await ctx.send(embed = discord.Embed(title="Announcement", colour=discord.Colour(0x7ed321), description="{} \n {}".format(role.mention, arg2)))
+    else:
+        await ctx.send('```You don\'t have perms to use this command```')
     
 bot.run(os.getenv('TOKEN'))
