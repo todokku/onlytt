@@ -59,7 +59,7 @@ async def clear(ctx, amount: int):
         mg = await ctx.send('```Deleted {} Messages```'.format(amount))
         await asyncio.sleep(3)
         await mg.delete()
-    elif not get(ctx.message.author.role, name="Co-Owner"):
+    elif not get(ctx.message.author.roles, name="Co-Owner"):
         await ctx.send('```You don\'t have perms to use this command```')
     else:
         mag = await ctx.send('```/clear [amount]```')
