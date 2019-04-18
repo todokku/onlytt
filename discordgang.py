@@ -7,6 +7,7 @@ from discord import Game
 from discord import Member
 from discord import emoji
 from json import load
+import datetime
 import random
 import asyncio
 import os
@@ -228,14 +229,14 @@ async def kick(ctx, member: discord.Member, *,reason=None):
             if ctx.message.author.top_role > member.top_role:
                 await member.kick()
                 await channel.send(embed=embed)
-            else:
-                if ctx.message.author.top_role <= member.top_role:
-                    await ctx.send('```You can\'t ban a staff member higher than you```')
+        else:
+            if ctx.message.author.top_role <= member.top_role:
+                await ctx.send('```You can\'t ban a staff member higher than you```')
 @kick.error
 async def kick_error(ctx, error):
     if isinstance(ctx, BadArgument):
         await ctx.send('Something Went Wrong')
     else:
-        await ctx.send('```/kick [Member] [Reason]```')   
+        await ctx.send('```p/kick [Member] [Reason]```')    
     
 bot.run(os.getenv('TOKEN'))
