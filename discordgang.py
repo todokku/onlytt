@@ -214,6 +214,7 @@ async def announce(ctx, *,arg2):
 @bot.command()
 async def kick(ctx, member: discord.Member, *,reason=None):
     d = datetime.datetime.now()
+    channel = bot.get_channel(559256239394258964)
     embed=discord.Embed(title='**Kicked By:** {}#{}'.format(ctx.message.author.name, ctx.message.author.discriminator), colour=discord.Colour(0x7ed321), description='**Reason:** {} \n **Time:** {}/{}/{}'.format(reason, d.year, d.month, d.day))
     embed.set_author(name='{}#{}'.format(member.name, member.discriminator), url="https://discordapp.com", icon_url='{}'.format(member.avatar_url, member.name, member.discriminator))
     embed.set_thumbnail(url="{}".format(ctx.message.author.avatar_url))
@@ -225,10 +226,11 @@ async def kick(ctx, member: discord.Member, *,reason=None):
     else:
         if ctx.message.author.top_role > role:
             if ctx.message.author.top_role > member.top_role:
-                await ctx.send(embed=embed)
-        else:
-            if ctx.message.author.top_role <= member.top_role:
-                await ctx.send('```You can\'t ban a staff member higher than you```')
+                await member.kick()
+                await channel.send(embed=embed)
+            else:
+                if ctx.message.author.top_role <= member.top_role:
+                    await ctx.send('```You can\'t ban a staff member higher than you```')
 @kick.error
 async def kick_error(ctx, error):
     if isinstance(ctx, BadArgument):
