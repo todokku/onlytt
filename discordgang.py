@@ -225,19 +225,13 @@ async def kick(ctx, member: discord.Member, *,reason=None):
             await ctx.send('```Only staff Can kick anyone```')
     elif reason is None:
         await ctx.send('You can\'t kick anyone without a reason')
-    else:
-        if ctx.message.author.top_role > role:
+    elif ctx.message.author.top_role > role:
+        if ctx.message.author.top_role <= member.top_role:
+            await ctx.send('```You can\'t ban a staff member higher than you```')
+        else:
             if ctx.message.author.top_role > member.top_role:
                 await member.kick()
                 await channel.send(embed=embed)
-        else:
-            if ctx.message.author.top_role <= member.top_role:
-                await ctx.send('```You can\'t ban a staff member higher than you```')
-@kick.error
-async def kick_error(ctx, error):
-    if isinstance(ctx, BadArgument):
-        await ctx.send('Something Went Wrong')
-    else:
-        await ctx.send('```p/kick [Member] [Reason]```')    
+      
     
 bot.run(os.getenv('TOKEN'))
