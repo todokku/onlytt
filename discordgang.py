@@ -19,7 +19,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     game = discord.Activity(name="GodsDevil Network", type=discord.ActivityType.listening)
-    await bot.change_presence(status=discord.Status.dnd, activity=game)
+    await bot.change_presence(status=discord.Status.idle, activity=game)
     
 @bot.event
 async def on_command_error(ctx, error):
