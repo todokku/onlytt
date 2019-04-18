@@ -1,5 +1,5 @@
 import discord
-from discord.ext.commands import CommandNotFound
+from discord.ext.commands import CommandNotFound, BadArgument, CheckFailure
 from discord.utils import get
 from discord.ext.commands import Bot
 from discord.ext import commands
@@ -12,7 +12,7 @@ import asyncio
 import os
 
 bot = discord.Client()
-bot = commands.Bot(command_prefix = 'p/')
+bot = commands.Bot(command_prefix = '/')
 bot.remove_command('help')
 
 @bot.event
@@ -23,7 +23,7 @@ async def on_ready():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
-        g = await ctx.send('```Unknown command try p/help```')
+        g = await ctx.send('```Unknown command try /help```')
         await asyncio.sleep(3)
         await g.delete()
     else:
@@ -62,7 +62,7 @@ async def clear(ctx, amount: int):
     elif not get(ctx.message.author.role, name="Co-Owner"):
         await ctx.send('```You don\'t have perms to use this command```')
     else:
-        mag = await ctx.send('```p/clear [amount]```')
+        mag = await ctx.send('```/clear [amount]```')
         await asyncio.sleep(2)
         await mag.delete()
 @bot.command()
@@ -76,7 +76,7 @@ async def rps(ctx, arg=None):
         await abc.delete()
         await ctx.message.delete()
     elif arg is None:
-        ctx.send('```p/rps [r or p or s], r for rock, p for paper, s for scissors```')
+        ctx.send('```/rps [r or p or s], r for rock, p for paper, s for scissors```')
     elif 'p' in arg:
         await ctx.send(random.choice(['Rock, You won',
                                       ':newspaper: , Its a tie',
@@ -90,7 +90,7 @@ async def rps(ctx, arg=None):
                                           ':newspaper: , You won',
                                           ':scissors: , Its a tie']))
 @bot.command(name='8ball')
-async def _8ball(ctx, arg=None):
+async def _8ball(ctx, reason=None):
     y = bot.get_channel(559253532759425044)
     x = (559253532759425044)
     channel = bot.get_channel(559253532759425044)
@@ -99,7 +99,7 @@ async def _8ball(ctx, arg=None):
         await asyncio.sleep(3)
         await abc.delete()
         await ctx.message.delete()
-    elif arg is None:
+    elif reason is None:
         f = await ctx.send('Please ask a question also')
         await asyncio.sleep(3)
         await f.delete()
@@ -140,7 +140,7 @@ async def enable(ctx):
         await ctx.message.delete()
     else:
         if ctx.invoked_subcommand is None:
-            await ctx.send('```p/enable (role) and do p/enable info for info of the available roles```')
+            await ctx.send('```/enable (role) and do /enable info for info of the available roles```')
 
 @enable.command(pass_context=True)
 async def info(ctx):
@@ -188,7 +188,7 @@ async def other(ctx):
         await abc.delete()
         await ctx.message.delete()
     else:
-        await ctx.send(embed = discord.Embed(title='Other Stuffs', colour=discord.Colour(0x7ed321), description='`p/enable` - adds some special roles do p/enable info for more information \n `More Comming Soon...`'))
+        await ctx.send(embed = discord.Embed(title='Other Stuffs', colour=discord.Colour(0x7ed321), description='`/enable` - adds some special roles do /enable info for more information \n `More Comming Soon...`'))
 
 @help.command(pass_context=True)
 async def fun(ctx):
@@ -200,7 +200,7 @@ async def fun(ctx):
         await abc.delete()
         await ctx.message.delete()
     else:
-        await ctx.send(embed = discord.Embed(title='Fun Commands', colour=discord.Colour(0x7ed321), description='`p/8ball`- Ask a question the 8ball will answer it with yes or no \n `p/rps`- Rock paper scissors game p/rps (r/p/s)'))
+        await ctx.send(embed = discord.Embed(title='Fun Commands', colour=discord.Colour(0x7ed321), description='`/8ball`- Ask a question the 8ball will answer it with yes or no \n `/rps`- Rock paper scissors game /rps (r/p/s)'))
 
 @bot.command(name='announce')
 async def announce(ctx, *,arg2):
@@ -210,5 +210,30 @@ async def announce(ctx, *,arg2):
         await ctx.send(embed = discord.Embed(title="Announcement", colour=discord.Colour(0x7ed321), description="{} \n {}".format(role.mention, arg2)))
     else:
         await ctx.send('```You don\'t have perms to use this command```')
+        
+@bot.command()
+async def kick(ctx, member: discord.Member, *,reason=None):
+    d = datetime.datetime.now()
+    embed=discord.Embed(title='**Kicked By:** {}#{}'.format(ctx.message.author.name, ctx.message.author.discriminator), colour=discord.Colour(0x7ed321), description='**Reason:** {} \n **Time:** {}/{}/{}'.format(reason, d.year, d.month, d.day))
+    embed.set_author(name='{}#{}'.format(member.name, member.discriminator), url="https://discordapp.com", icon_url='{}'.format(member.avatar_url, member.name, member.discriminator))
+    embed.set_thumbnail(url="{}".format(ctx.message.author.avatar_url))
+    role = discord.utils.get(ctx.guild.roles, name="Retired Staff")
+    if ctx.message.author.top_role < role:
+            await ctx.send('```Only staff Can kick anyone```')
+    elif reason is None:
+        await ctx.send('You can\'t kick anyone without a reason')
+    else:
+        if ctx.message.author.top_role > role:
+            if ctx.message.author.top_role > member.top_role:
+                await ctx.send(embed=embed)
+        else:
+            if ctx.message.author.top_role <= member.top_role:
+                await ctx.send('```You can\'t ban a staff member higher than you```')
+@kick.error
+async def kick_error(ctx, error):
+    if isinstance(ctx, BadArgument):
+        await ctx.send('Something Went Wrong')
+    else:
+        await ctx.send('```/kick [Member] [Reason]```')   
     
 bot.run(os.getenv('TOKEN'))
