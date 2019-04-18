@@ -1,5 +1,6 @@
 import discord
-from discord.ext.commands import CommandNotFound, BadArgument, CheckFailure
+from discord.ext.commands import CommandNotFound
+from discord.ext.commands import CheckFailure, BadArgument
 from discord.utils import get
 from discord.ext.commands import Bot
 from discord.ext import commands
@@ -19,7 +20,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     game = discord.Activity(name="GodsDevil Network", type=discord.ActivityType.listening)
-    await bot.change_presence(status=discord.Status.idle, activity=game)
+    await bot.change_presence(status=discord.Status.dnd, activity=game)
     
 @bot.event
 async def on_command_error(ctx, error):
