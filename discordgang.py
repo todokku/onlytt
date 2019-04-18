@@ -53,7 +53,7 @@ async def on_member_remove(member):
 
 @bot.command(name='clear')
 async def clear(ctx, amount: int):
-    if get(ctx.message.author.role, name="Co-Owner"):
+    if get(ctx.message.author.roles, name="Co-Owner"):
         await ctx.channel.purge(limit=amount)
         await asyncio.sleep(1)
         mg = await ctx.send('```Deleted {} Messages```'.format(amount))
