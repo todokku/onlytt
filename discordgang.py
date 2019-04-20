@@ -20,7 +20,7 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     game = discord.Activity(name="GodsDevil Network", type=discord.ActivityType.listening)
-    await bot.change_presence(status=discord.Status.idle, activity=game)
+    await bot.change_presence(status=discord.Status.dnd, activity=game)
     
 @bot.event
 async def on_command_error(ctx, error):
@@ -239,6 +239,6 @@ async def kick_error(ctx, error):
     if isinstance(ctx, BadArgument):
         await ctx.send('Something Went Wrong')
     else:
-        await ctx.send('```p/kick [Member] [Reason]```')    
+        await ctx.send('```/kick [Member] [Reason]```')    
     
 bot.run(os.getenv('TOKEN'))
