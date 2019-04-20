@@ -230,6 +230,7 @@ async def kick(ctx, member: discord.Member, *,reason=None):
             await ctx.send('```You can\'t ban a staff member higher than you```')
         else:
             if ctx.message.author.top_role > member.top_role:
+                await member.send('You have been kicked by **{}#{}** for `Reason:` {}'.format(ctx.message.author.name, ctx.message.author.discriminator, reason))
                 await member.kick()
                 await channel.send(embed=embed)
       
