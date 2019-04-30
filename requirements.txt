@@ -1,1 +1,1 @@
-discord.py
+pip3 install -U discord.py
