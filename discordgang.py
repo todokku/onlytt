@@ -38,7 +38,7 @@ async def _8ball(ctx, reason=None):
         await asyncio.sleep(3)
         await f.delete()
         await ctx.message.delete()
-    elif 'you' or 'your' in reason.content.strip().lower():
+    elif 'your' in reason.content.strip().lower():
         await ctx.send('NOU')
     else:
         await ctx.send(random.choice(['```Maybe```',
@@ -73,8 +73,8 @@ async def on_message(message):
                                           'HELL NO, i won\'t help a nab like u',
                                           'ok, if u need help, please do /ban me',
                                           'L NO']))
-            await asyncio.sleep(0.9)
-            await ctx.send('AH ok, do ;help')
+            await asyncio.sleep(1.5)
+            await ctx.send('AH ok, do `;help`')
         elif 'no' in msg.content.strip().lower():
             await ctx.send('ok bye NAB')
     else:
