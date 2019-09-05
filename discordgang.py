@@ -38,19 +38,16 @@ async def _8ball(ctx, reason=None):
         await asyncio.sleep(3)
         await f.delete()
         await ctx.message.delete()
+    elif 'you' or 'your' in reason.content.strip().lower():
+        await ctx.send('NOU')
     else:
-        if 'smart'  in reason.content.strip().lower():
-            await ctx.send('am smart/handsome/intelligent none else boi')
-        elif 'you' or 'your' in reason.content.strip().lower():
-            await ctx.send('NOU')
-        else:
-            await ctx.send(random.choice(['```Maybe```',
-                                          '```Yes```',
-                                          '```No```',
-                                          '```100%```',
-                                          '```Scince says **Yes** ```',
-                                          '```Scince says **No**```',
-                                          '```Can\'t say```']))
+        await ctx.send(random.choice(['```Maybe```',
+                                      '```Yes```',
+                                      '```No```',
+                                      '```100%```',
+                                      '```Scince says **Yes** ```',
+                                      '```Scince says **No**```',
+                                      '```Can\'t say```']))
 
 @bot.command()
 async def say(ctx, *,reason=None):
