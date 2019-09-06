@@ -9,7 +9,7 @@ from discord.ext import commands
 from discord import Member
 from discord import emoji
 import random
-import os
+import o
 import asyncio
 
 bot = commands.Bot(command_prefix=';')
