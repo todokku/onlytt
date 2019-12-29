@@ -14,7 +14,6 @@ import random
 import asyncio
 
 bot = commands.Bot(command_prefix=';')
-token = 'NjYwNzYyNTQ1OTcxMjY1NTUy.XghlKg.mrt6KPIQodz4RQEpe--JFaQtDGE'
 
 @bot.command()
 async def ping(ctx):
@@ -68,4 +67,4 @@ async def suggest(ctx,*,arg=None):
         await channel.send(embed=embed)
     
 
-bot.run(token)
+bot.run(os.getenv('TOKEN'))
