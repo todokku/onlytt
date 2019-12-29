@@ -12,7 +12,7 @@ from discord import emoji
 import datetime
 import random
 import asyncio
-import
+import os
 
 bot = commands.Bot(command_prefix=';')
 
