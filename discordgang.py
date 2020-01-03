@@ -32,10 +32,8 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     ctx = message.channel
-    if str(ctx.message.author) == "660762545971265552":
-        await bot.process_commands(message)
-    elif 'bot tester' in message.content.strip().lower():
-        await ctx.send('My name is smart bot, please call me smart bot not "bot tester" ')
+    if 'bot tester' in message.content.strip().lower():
+        await ctx.send('My name is smart bot, please call me smart bot not with that name ')
     elif 'go cry smart bot' in message.content.strip().lower():
         await ctx.send(random.choice(['NO CRY YA ASS OF NAB',
                                       'Breh, No you go cry \n My rymes gonna make you fry \n You won\'t be able to even tho you try \n Now you gonna cry']))
