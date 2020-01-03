@@ -32,7 +32,7 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     ctx = message.channel
-    if ctx.message.author.id == "660762545971265552":
+    if str(ctx.message.author) == "660762545971265552":
         await bot.process_commands(message)
     elif 'bot tester' in message.content.strip().lower():
         await ctx.send('My name is smart bot, please call me smart bot not "bot tester" ')
