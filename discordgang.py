@@ -32,22 +32,31 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     ctx = message.channel
-    if 'go cry bot tester' in message.content.strip().lower():
+    if 'bot tester' in message.content.strip().lower():
+        await ctx.send('My name is smart bot, please call me smart bot not "bot tester" ')
+    elif 'go cry smart bot' in message.content.strip().lower():
         await ctx.send(random.choice(['NO CRY YA ASS OF NAB',
                                       'Breh, No you go cry \n My rymes gonna make you fry \n You won\'t be able to even tho you try \n Now you gonna cry']))
-    elif 'bot tester your gay' in message.content.strip().lower():
-        await ctx.send('IMA FR BEAT U UP WITH THE THANOS HAMMER')
-    elif 'hi bot tester' in message.content.strip().lower():
+    elif 'test' in message.content.strip().lower():
+        await ctx.send('!help')
+    elif 'smart bot your gay' in message.content.strip().lower():
+        await ctx.send(random.choice(['Nou ;)',
+                                      'Your mum gay',
+                                      'Na its your dad who sucks my dick',
+                                      'Your gayer Dumbass']))
+    elif 'hi smart bot' in message.content.strip().lower():
         await ctx.send('Hi {}'.format(message.author.mention))
         await asyncio.sleep(0.9)
-        await ctx.send('Need help?')
+        await ctx.send(random.choice(['Sup, Need help?, answer me in yes or no',
+                                      'Need help man?, Yes or No?',
+                                      'Hey!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!, Need help, yes or no?']))
         msg = await bot.wait_for('message', timeout=30)
         if 'yes' in msg.content.strip().lower():
             await ctx.send(random.choice(['I won\'t help you LOL',
                                           'HELL NO, i won\'t help a nab like u',
                                           'ok, if u need help, please do /ban me',
                                           'L NO']))
-            await asyncio.sleep(1.5)
+            await asyncio.sleep(5.5)
             await ctx.send('AH ok, do `;help`')
         elif 'no' in msg.content.strip().lower():
             await ctx.send('ok bye NAB')
@@ -66,6 +75,7 @@ async def suggest(ctx,*,arg=None):
         embed.set_author(name="{}#{}".format(member.name, member.discriminator), icon_url='{}'.format(member.avatar_url))
         embed.set_footer(text="")
         await channel.send(embed=embed)
+        await ctx.send('Done :wink:')
     
 
 bot.run(os.getenv('TOKEN'))
