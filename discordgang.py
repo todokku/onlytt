@@ -75,7 +75,7 @@ async def suggest(ctx,*,arg=None):
         embed.set_author(name="{}#{}".format(member.name, member.discriminator), icon_url='{}'.format(member.avatar_url))
         embed.set_footer(text="")
         await channel.send(embed=embed)
-        await ctx.send('Done :wink:')
+        await ctx.send('Done :wink: xD')
     
 
 bot.run(os.getenv('TOKEN'))
