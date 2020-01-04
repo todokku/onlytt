@@ -37,8 +37,6 @@ async def on_message(message):
     elif 'go cry smart bot' in message.content.strip().lower():
         await ctx.send(random.choice(['NO CRY YA ASS OF NAB',
                                       'Breh, No you go cry \n My rymes gonna make you fry \n You won\'t be able to even tho you try \n Now you gonna cry']))
-    elif 'test' in message.content.strip().lower():
-        await ctx.send('!help')
     elif 'smart bot your gay' in message.content.strip().lower():
         await ctx.send(random.choice(['Nou ;)',
                                       'Your mum gay',
@@ -76,6 +74,21 @@ async def suggest(ctx,*,arg=None):
         embed.set_footer(text="")
         await channel.send(embed=embed)
         await ctx.send('Done :wink: xD')
+
+@bot.command()
+async def report(ctx, name=None, *,arg=None):
+    channel = bot.get_channel(662988499913408512)
+    member = ctx.message.author
+    if name == None:
+        await ctx.send('Tell us the name of the person who you think has done something wrong')
+    elif arg == None:
+        await ctx.send('The reason?, Whats the reason idiot')
+    else:
+        embed=discord.Embed(title="Reason: {}".format(arg), description="{}".format(name), color=0x1d04f4)
+        embed.set_author(name="{}#{}".format(member.name, member.discriminator), icon_url='{}'.format(member.avatar_url))
+        embed.set_footer(text="")
+        await channel.send(embed=embed)
+        await ctx.send('Reported :wink:')
     
 
 bot.run(os.getenv('TOKEN'))
