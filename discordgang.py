@@ -80,11 +80,11 @@ async def report(ctx, name=None, *,arg=None):
     channel = bot.get_channel(662988499913408512)
     member = ctx.message.author
     if name == None:
-        await ctx.send('Tell us the name of the person who you think has done something wrong')
+        await ctx.send('Tell us the name of the person who you think has done something wrong, if there is none just put none or N/A')
     elif arg == None:
         await ctx.send('The reason?, Whats the reason idiot')
     else:
-        embed=discord.Embed(title="Reason: {}".format(arg), description="{}".format(name), color=0x1d04f4)
+        embed=discord.Embed(title="Suspect: {}".format(name), description="Reason: {}".format(arg), color=0x1d04f4)
         embed.set_author(name="{}#{}".format(member.name, member.discriminator), icon_url='{}'.format(member.avatar_url))
         embed.set_footer(text="")
         await channel.send(embed=embed)
