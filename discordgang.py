@@ -37,9 +37,9 @@ async def background_task():
         embed.add_field(name="Subsribers", value="{}".format(int(subs)), inline=True)
         embed.add_field(name="Veiws", value="{}".format(int(veiw)), inline=True)
         embed.add_field(name="Total Videos", value="{}".format(int(vid)), inline=True)
-        embed.set_footer(text="*Updated every 40 seconds*")
+        embed.set_footer(text="*Updates every 30 seconds*")
         pong = await channel.send(embed=embed)
-        await asyncio.sleep(40)
+        await asyncio.sleep(30)
         await pong.edit(embed=embed)
         await pong.delete()    
     
