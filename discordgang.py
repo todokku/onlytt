@@ -10,7 +10,9 @@ from discord.ext import commands
 from discord import Member
 from discord import emoji
 import datetime
+import urllib.request
 import random
+import json
 import asyncio
 import os
 
