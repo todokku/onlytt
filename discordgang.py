@@ -35,7 +35,7 @@ async def background_task():
         embed.set_author(name="Itzdvbravo's Youtube Live Status", icon_url="https://cdn.discordapp.com/avatars/533894799577841665/d44545c7c57ef5bde8ffa6a35c75e269.png?size=256")
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/683648447903039500/683700959473565726/minecraft-1469255_1920.png")
         embed.add_field(name="Subsribers", value="{}".format(int(subs)), inline=True)
-        embed.add_field(name="Veiws", value="{}".format(int(veiw)), inline=True)
+        embed.add_field(name="Total Veiws", value="{}".format(int(veiw)), inline=True)
         embed.add_field(name="Total Videos", value="{}".format(int(vid)), inline=True)
         embed.set_footer(text="*Updates every 30 seconds*")
         pong = await channel.send(embed=embed)
