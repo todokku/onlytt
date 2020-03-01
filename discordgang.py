@@ -16,79 +16,28 @@ import os
 
 bot = commands.Bot(command_prefix=';')
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send('{} is my ping sir!'.format(round(bot.latency, 1)))
-
-@bot.command()
-async def hi(ctx):
-    await ctx.send('hi')
-
 @bot.event
 async def on_ready():
-    game = discord.Activity(name="Itzdvbravo", type=discord.ActivityType.listening)
+    game = discord.Activity(name="Itzdvbravo's Server", type=discord.ActivityType.listening)
     await bot.change_presence(status=discord.Status.dnd, activity=game)
 
-@bot.event
-async def on_message(message):
-    ctx = message.channel
-    if 'bot tester' in message.content.strip().lower():
-        await ctx.send('My name is smart bot, please call me smart bot not with that name ')
-    elif 'go cry smart bot' in message.content.strip().lower():
-        await ctx.send(random.choice(['NO CRY YA ASS OF NAB',
-                                      'Breh, No you go cry \n My rymes gonna make you fry \n You won\'t be able to even tho you try \n Now you gonna cry']))
-    elif 'smart bot your gay' in message.content.strip().lower():
-        await ctx.send(random.choice(['Nou ;)',
-                                      'Your mum gay',
-                                      'Na its your dad who sucks my dick',
-                                      'Your gayer Dumbass']))
-    elif 'hi smart bot' in message.content.strip().lower():
-        await ctx.send('Hi {}'.format(message.author.mention))
-        await asyncio.sleep(0.9)
-        await ctx.send(random.choice(['Sup, Need help?, answer me in yes or no',
-                                      'Need help man?, Yes or No?',
-                                      'Hey!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!, Need help, yes or no?']))
-        msg = await bot.wait_for('message', timeout=30)
-        if 'yes' in msg.content.strip().lower():
-            await ctx.send(random.choice(['I won\'t help you LOL',
-                                          'HELL NO, i won\'t help a nab like u',
-                                          'ok, if u need help, please do /ban me',
-                                          'L NO']))
-            await asyncio.sleep(5.5)
-            await ctx.send('AH ok, do `;help`')
-        elif 'no' in msg.content.strip().lower():
-            await ctx.send('ok bye NAB')
-    else:
-        await bot.process_commands(message)
-
-
 @bot.command()
-async def suggest(ctx,*,arg=None):
-    channel = bot.get_channel(660750866713804880)
-    member = ctx.message.author
+async def check(ctx, arg=None):
+    data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC0DdJlY_b6ySlOp3YtDjvxA&key=AIzaSyCsfglSpz_K17iqA_ezeA5oD01pmhSerZ0").read()
+    subs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+    vid = json.loads(data)["items"][0]["statistics"]["videoCount"]
+    veiw = json.loads(data)["items"][0]["statistics"]["viewCount"]
     if arg == None:
-        await ctx.send('Suggest us something idiot')
+        await ctx.send("Please use `;check <option>`, options are *subs* and *videocount/vc* and *veiws*")
+    elif arg == 'subs':
+        await ctx.send("Itzdvbravo has {} Subscribers".format(int(subs)))
+    elif arg == 'videocount':
+        await ctx.send("Itzdvbravo has uploaded {} videos till now".format(int(vid)))
+    elif arg == 'vc':
+        await ctx.send("Itzdvbravo has uploaded {} videos till now".format(int(vid)))
+    elif arg == 'veiws':
+        await ctx.send("Itzdvbravo, in total he has {} veiws, in all his videos".format(int(veiw)))
     else:
-        embed=discord.Embed(title="Suggestion: {}".format(arg), description="", color=0x1d04f4)
-        embed.set_author(name="{}#{}".format(member.name, member.discriminator), icon_url='{}'.format(member.avatar_url))
-        embed.set_footer(text="")
-        await channel.send(embed=embed)
-        await ctx.send('Done :wink: xD')
-
-@bot.command()
-async def report(ctx, name=None, *,arg=None):
-    channel = bot.get_channel(662988499913408512)
-    member = ctx.message.author
-    if name == None:
-        await ctx.send('Tell us the name of the person who you think has done something wrong, if there is none just put none or N/A')
-    elif arg == None:
-        await ctx.send('The reason?, Whats the reason idiot')
-    else:
-        embed=discord.Embed(title="Suspect: {}".format(name), description="Reason: {}".format(arg), color=0x1d04f4)
-        embed.set_author(name="{}#{}".format(member.name, member.discriminator), icon_url='{}'.format(member.avatar_url))
-        embed.set_footer(text="")
-        await channel.send(embed=embed)
-        await ctx.send('Reported :wink:')
-    
+        await ctx.send("Please use `;check <option>`, options are *subs* and *videocount/vc* and *veiws*")    
 
 bot.run(os.getenv('TOKEN'))
