@@ -41,8 +41,9 @@ async def background_task():
         pong = await channel.send(embed=embed)
         await asyncio.sleep(30)
         await pong.edit(embed=embed)
+        await asyncio.sleep(30)
+        await pong.delete()  
         await asyncio.sleep(0.5)
-        await pong.delete()    
     
 @bot.command()
 async def check(ctx, arg=None):
