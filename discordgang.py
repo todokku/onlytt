@@ -1,4 +1,4 @@
-import discor
+import discord
 from discord.ext import commands
 from discord import User
 from discord import Game
@@ -43,7 +43,7 @@ async def background_task():
         await pong.edit(embed=embed)
         await asyncio.sleep(30)
         await pong.delete()  
-        await asyncio.sleep(0.5)
+        await asyncio.sleep(1)
     
 @bot.command()
 async def check(ctx, arg=None):
