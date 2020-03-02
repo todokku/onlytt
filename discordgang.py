@@ -41,6 +41,7 @@ async def background_task():
         pong = await channel.send(embed=embed)
         await asyncio.sleep(30)
         await pong.edit(embed=embed)
+        await asyncio.sleep(0.5)
         await pong.delete()    
     
 @bot.command()
@@ -58,7 +59,7 @@ async def check(ctx, arg=None):
     elif arg == 'vc':
         await ctx.send("Itzdvbravo has uploaded {} videos till now".format(int(vid)))
     elif arg == 'views':
-        await ctx.send("Itzdvbravo, in total he has {} views, in all his videos".format(int(veiw)))
+        await ctx.send("Itzdvbravo, in total he has {} views, in all his videos".format(int(view)))
     else:
         await ctx.send("Please use `;check <option>`, options are *subs* and *videocount/vc* and *veiws*")    
 
