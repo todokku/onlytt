@@ -1,4 +1,4 @@
-import discor
+import discord
 from discord.ext import commands
 from discord import User
 from discord import Game
@@ -26,6 +26,7 @@ async def on_ready():
 async def background_task():
     await bot.wait_until_ready()
     channel = bot.get_channel(683711122808766524)
+    pong = await channel.fetch_message(683960600988352512)
     while not bot.is_closed():
         data = urllib.request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UC0DdJlY_b6ySlOp3YtDjvxA&key=AIzaSyCsfglSpz_K17iqA_ezeA5oD01pmhSerZ0").read()
         subs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
@@ -38,12 +39,8 @@ async def background_task():
         embed.add_field(name="Total Veiws", value="{}".format(int(veiw)), inline=True)
         embed.add_field(name="Total Videos", value="{}".format(int(vid)), inline=True)
         embed.set_footer(text="*Updates every 30 seconds*")
-        pong = await channel.send(embed=embed)
-        await asyncio.sleep(30)
         await pong.edit(embed=embed)
         await asyncio.sleep(30)
-        await pong.delete()  
-        await asyncio.sleep(1)
     
 @bot.command()
 async def check(ctx, arg=None):
