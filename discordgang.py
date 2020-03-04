@@ -45,11 +45,11 @@ async def background_task():
         bod.add_field(name="Subsribers", value="{}".format(int(subs)), inline=True)
         bod.add_field(name="Total Veiws", value="{}".format(int(view)), inline=True)
         bod.add_field(name="Total Videos", value="{}".format(int(vid)), inline=True)
-        bod.set_footer(text="*Updates every 10 minutes*")
+        bod.set_footer(text="*Updates every 5 minutes*")
         await pong.edit(embed=bod)
-        await asyncio.sleep(600)
+        await asyncio.sleep(300)
         await pong.edit(embed=embed)
-        await asyncio.sleep(600)
+        await asyncio.sleep(300)
     
 @bot.command()
 async def check(ctx, arg=None):
