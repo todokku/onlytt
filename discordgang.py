@@ -38,7 +38,7 @@ async def background_task():
         embed.add_field(name="Subsribers", value="{}".format(int(subs)), inline=True)
         embed.add_field(name="Total Veiws", value="{}".format(int(view)), inline=True)
         embed.add_field(name="Total Videos", value="{}".format(int(vid)), inline=True)
-        embed.set_footer(text="*Updates every 10 minutes*")
+        embed.set_footer(text="*Updates every 5 minutes*")
         bod=discord.Embed(title="Click to view my channel", url="https://www.youtube.com/channel/UC0DdJlY_b6ySlOp3YtDjvxA")
         bod.set_author(name="Itzdvbravo's Youtube Live Status", icon_url="https://cdn.discordapp.com/avatars/533894799577841665/d44545c7c57ef5bde8ffa6a35c75e269.png?size=256")
         bod.set_thumbnail(url="https://cdn.discordapp.com/attachments/683648447903039500/683700959473565726/minecraft-1469255_1920.png")
